@@ -51,17 +51,19 @@ const App = () => {
   };
 
   const monthName = currentDate.toLocaleString('default', { month: 'long' });
-  const year = currentDate.getFullYear() + "";
+  const year = currentDate.getFullYear();
 
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold mb-4 mt-3 text-center">Dynamic Calendar Event</h1>
-      <div className="flex justify-evenly items-center mb-10">
+      <h1 className="text-3xl font-bold mb-4 text-center">Dynamic Calendar Event</h1>
+      
+      <div className="flex justify-evenly items-center mb-4">
         <Button onClick={() => changeMonth(-1)}>Previous</Button>
         <h2 className="text-xl">{monthName} {year}</h2>
         <Button onClick={() => changeMonth(1)}>Next</Button>
       </div>
-      <Calendar events={events} openModal={openModal} />
+      
+      <Calendar events={events} openModal={openModal} currentDate={currentDate} />
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h2 className="text-xl mb-4">Add Event for Day {selectedDay}</h2>

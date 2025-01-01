@@ -1,18 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-const Calendar = ({ events, openModal})=> {
-  const [selectedDay, setSelectedDay] = useState(null);
+const Calendar = ({ events, openModal, currentDate }) => {
   
-   const [currentDate, setCurrentDate] = useState(new Date());
-   let daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth()+1 , 0).getDate(); 
-
-
-  const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
-
-  const days = [...Array(firstDayOfMonth).fill(null), ...Array(daysInMonth).keys()].map((day, index) => day === null ? null : index +1);
+  const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+  
+  const days = [ ...Array(daysInMonth)].map((day, index) => day === null ? null : index + 1  );
 
   const renderDay = (day) => {
-
     const dayEvents = events.filter(event => event.day === day);
     return (
       <div
@@ -35,8 +29,8 @@ const Calendar = ({ events, openModal})=> {
   };
 
   return (
-    <div className="grid grid-cols-7 gap-4 m-4">
-       {days.map((day, index) => (
+    <div className="grid grid-cols-7 gap-4 mb-8">
+      {days.map((day, index) => (
         <div key={index} className="text-center">
           {day ? renderDay(day) : <div className="border p-4" />}
         </div>
